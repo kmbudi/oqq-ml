@@ -1,15 +1,16 @@
-FROM python:3.9
+# Gunakan image base Python versi 3.8
+FROM python:3.8-slim-buster
 
-# set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+# Set direktori kerja dalam Docker
+WORKDIR /app
 
-COPY requirements.txt .
+# Salin dependencies file
+COPY requirements.txt requirements.txt
 
-# install python dependencies
-RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
+# Install dependencies
+RUN pip3 install -r requirements.txt
 
+# Salin semua file ke direktori kerja
 COPY . .
 
 # gunicorn
